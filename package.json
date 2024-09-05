@@ -9,18 +9,32 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
-  "main": "./extension.js",
+  "activationEvents": [
+    "onView:fileSizeMonitorView"
+  ],
+  "main": "./src/extension.js",
   "contributes": {
-    "commands": [{
-      "command": "filesize-monitor.helloWorld",
-      "title": "Hello World"
-    }]
+    "views": {
+      "explorer": [
+        {
+          "id": "fileSizeMonitorView",
+          "name": "File Sizes",
+          "contextualTitle": "File Sizes"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "fileSizeMonitor.showSizes",
+        "title": "Show File Sizes"
+      }
+    ]
   },
   "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "vscode-test"
+    "vscode:prepublish": "npm run compile",
+    "compile": "webpack --config webpack.config.js",
+    "watch": "webpack --watch --config webpack.config.js",
+    "lint": "eslint src --ext ts,js"
   },
   "devDependencies": {
     "@types/vscode": "^1.92.0",
