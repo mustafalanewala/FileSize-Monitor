@@ -5,22 +5,21 @@
   "version": "0.0.1",
   "publisher": "mustafalanewala",
   "engines": {
-    "vscode": "^1.92.0"
+    "vscode": "^1.93.0"
   },
   "categories": [
     "Other"
   ],
+  "main": "./src/extension.js",
   "activationEvents": [
     "onView:fileSizeMonitorView"
   ],
-  "main": "./src/extension.js",
   "contributes": {
     "views": {
       "explorer": [
         {
           "id": "fileSizeMonitorView",
-          "name": "File Sizes",
-          "contextualTitle": "File Sizes"
+          "name": "File Sizes"
         }
       ]
     },
@@ -28,6 +27,22 @@
       {
         "command": "fileSizeMonitor.showSizes",
         "title": "Show File Sizes"
+      },
+      {
+        "command": "fileSizeMonitor.sortBySize",
+        "title": "Sort by Size"
+      },
+      {
+        "command": "fileSizeMonitor.sortByName",
+        "title": "Sort by Name"
+      },
+      {
+        "command": "fileSizeMonitor.filterJS",
+        "title": "Filter by .js Files"
+      },
+      {
+        "command": "fileSizeMonitor.clearFilter",
+        "title": "Clear Filters"
       }
     ]
   },

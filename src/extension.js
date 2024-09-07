@@ -5,11 +5,25 @@ function activate(context) {
     const fileSizeProvider = new FileSizeProvider();
     context.subscriptions.push(fileSizeProvider);
 
-    let disposable = vscode.commands.registerCommand('fileSizeMonitor.showSizes', async function () {
-        vscode.window.showInformationMessage('File Sizes can be viewed in the "File Sizes" view in the Explorer.');
-    });
+    context.subscriptions.push(vscode.commands.registerCommand('fileSizeMonitor.sortBySize', () => {
+        fileSizeProvider.setSortOrder('size');
+        vscode.window.showInformationMessage('Files sorted by size.');
+    }));
 
-    context.subscriptions.push(disposable);
+    context.subscriptions.push(vscode.commands.registerCommand('fileSizeMonitor.sortByName', () => {
+        fileSizeProvider.setSortOrder('name');
+        vscode.window.showInformationMessage('Files sorted by name.');
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('fileSizeMonitor.filterJS', () => {
+        fileSizeProvider.setFileFilter(['.js']);
+        vscode.window.showInformationMessage('Showing only .js files.');
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('fileSizeMonitor.clearFilter', () => {
+        fileSizeProvider.setFileFilter([]);
+        vscode.window.showInformationMessage('File filter cleared.');
+    }));
 }
 
 function deactivate() {}
